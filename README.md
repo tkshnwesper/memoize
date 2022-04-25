@@ -29,6 +29,14 @@ add_two(5)
 add_two(5)
 ```
 
+## Developing
+
+To generate docs, run
+
+```shell
+crystal docs --source-refname=<tag>
+```
+
 ## Contributing
 
 1. Fork it (<https://github.com/tkshnwesper/memoize/fork>)
