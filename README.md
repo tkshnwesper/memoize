@@ -1,6 +1,6 @@
 # memoize
 
-TODO: Write a description here
+Macros for memoizing functions.
 
 ## Installation
 
@@ -9,7 +9,7 @@ TODO: Write a description here
    ```yaml
    dependencies:
      memoize:
-       github: your-github-user/memoize
+       github: tkshnwesper/memoize
    ```
 
 2. Run `shards install`
@@ -18,17 +18,20 @@ TODO: Write a description here
 
 ```crystal
 require "memoize"
+
+Memoize.memoize add_two, NamedTuple(n: Int32), Int32 do
+  puts "Computed"
+  n + 2
+end
+
+add_two(5)  # Prints "Computed"
+add_two(5)
+add_two(5)
 ```
-
-TODO: Write usage instructions here
-
-## Development
-
-TODO: Write development instructions here
 
 ## Contributing
 
-1. Fork it (<https://github.com/your-github-user/memoize/fork>)
+1. Fork it (<https://github.com/tkshnwesper/memoize/fork>)
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
@@ -36,4 +39,4 @@ TODO: Write development instructions here
 
 ## Contributors
 
-- [tkshnwesper](https://github.com/your-github-user) - creator and maintainer
+- [tkshnwesper](https://github.com/tkshnwesper) - creator and maintainer
