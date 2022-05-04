@@ -38,9 +38,9 @@ module Memoize
   #   n + 2
   # end
   #
-  # add_two(6) # Prints "Computed"
-  # add_two(6)
-  # add_two(6)
+  # add_two(6) # Prints "Computed" and returns 6
+  # add_two(6) # returns 6
+  # add_two(6) # returns 6
   # ```
   macro memoize(method_name, param_tuple, return_type, &block)
     {% param_named_tuple = param_tuple.named_args %}
