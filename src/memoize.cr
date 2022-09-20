@@ -12,7 +12,7 @@
 # The above usage will generate
 #
 # ```
-# CACHE_get_number = {} of {Int32} => String
+# @CACHE_get_number = {} of {Int32} => String
 #
 # def _get_number(n : Int32) : String
 #   puts "Computed"
@@ -20,10 +20,10 @@
 # end
 #
 # def get_number(n : Int32) : String
-#   if CACHE_get_number.has_key?({n})
-#     CACHE_get_number[{n}]
+#   if @CACHE_get_number.has_key?({n})
+#     @CACHE_get_number[{n}]
 #   else
-#     CACHE_get_number[{n}] = _get_number(n)
+#     @CACHE_get_number[{n}] = _get_number(n)
 #   end
 # end
 # ```
@@ -38,9 +38,9 @@ module Memoize
   #   n + 2
   # end
   #
-  # add_two(6) # Prints "Computed" and returns 6
-  # add_two(6) # returns 6
-  # add_two(6) # returns 6
+  # add_two(5) # Prints "Computed" and returns 7
+  # add_two(5) # returns 7
+  # add_two(5) # returns 7
   # ```
   macro memoize(method_name, param_tuple, return_type, &block)
     {% param_named_tuple = param_tuple.named_args %}
@@ -48,17 +48,17 @@ module Memoize
     {% type_list = param_named_tuple.values %}
     {% def_param_list = param_named_tuple.map { |param, type| "#{param} : #{type}" }.join(", ").id %}
 
-    CACHE_{{ method_name }} = {} of {{ *type_list }} => {{ return_type }}
+    @CACHE_{{ method_name }} = {} of {{ *type_list }} => {{ return_type }}
 
     def _{{ method_name }}({{ def_param_list }}) : {{ return_type }}
         {{ yield }}
     end
 
     def {{ method_name }}({{ def_param_list }}) : {{ return_type }}
-        if CACHE_{{ method_name }}.has_key?({{ *param_list }})
-            CACHE_{{ method_name }}[{{ *param_list }}]
+        if @CACHE_{{ method_name }}.has_key?({{ *param_list }})
+            @CACHE_{{ method_name }}[{{ *param_list }}]
         else
-            CACHE_{{ method_name }}[{{ *param_list }}] = _{{ method_name }}({{ *param_list }})
+            @CACHE_{{ method_name }}[{{ *param_list }}] = _{{ method_name }}({{ *param_list }})
         end
     end
   end
