@@ -24,9 +24,9 @@ Memoize.memoize add_two, NamedTuple(n: Int32), Int32 do
   n + 2
 end
 
-add_two(5)  # Prints "Computed" and returns 6
-add_two(5)  # returns 6
-add_two(5)  # returns 6
+add_two(4)  # Prints "Computed" and returns 6
+add_two(4)  # returns 6
+add_two(4)  # returns 6
 ```
 
 ## Developing
