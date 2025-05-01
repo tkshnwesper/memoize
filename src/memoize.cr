@@ -48,17 +48,17 @@ module Memoize
     {% type_list = param_named_tuple.values %}
     {% def_param_list = param_named_tuple.map { |param, type| "#{param} : #{type}" }.join(", ").id %}
 
-    @CACHE_{{ method_name }} = {} of {{ *type_list }} => {{ return_type }}
+    @CACHE_{{ method_name }} = {} of {{ type_list.splat }} => {{ return_type }}
 
     def _{{ method_name }}({{ def_param_list }}) : {{ return_type }}
         {{ yield }}
     end
 
     def {{ method_name }}({{ def_param_list }}) : {{ return_type }}
-        if @CACHE_{{ method_name }}.has_key?({{ *param_list }})
-            @CACHE_{{ method_name }}[{{ *param_list }}]
+        if @CACHE_{{ method_name }}.has_key?({{ param_list.splat }})
+            @CACHE_{{ method_name }}[{{ param_list.splat }}]
         else
-            @CACHE_{{ method_name }}[{{ *param_list }}] = _{{ method_name }}({{ *param_list }})
+            @CACHE_{{ method_name }}[{{ param_list.splat }}] = _{{ method_name }}({{ param_list.splat }})
         end
     end
   end
@@ -72,17 +72,17 @@ module Memoize
     {% type_list = param_named_tuple.values %}
     {% def_param_list = param_named_tuple.map { |param, type| "#{param} : #{type}" }.join(", ").id %}
 
-    @CACHE_{{ method_name }} = {} of {{ *type_list }} => {{ return_type }}
+    @CACHE_{{ method_name }} = {} of {{ type_list.splat }} => {{ return_type }}
 
     def _{{ method_name }}({{ def_param_list }}) : {{ return_type }}
         {{ yield }}
     end
 
     def {{ method_name }}({{ def_param_list }}) : {{ return_type }}
-        if @CACHE_{{ method_name }}.has_key?({{ *param_list }})
-            @CACHE_{{ method_name }}[{{ *param_list }}]
+        if @CACHE_{{ method_name }}.has_key?({{ param_list.splat }})
+            @CACHE_{{ method_name }}[{{ param_list.splat }}]
         else
-            @CACHE_{{ method_name }}[{{ *param_list }}] = _{{ method_name }}({{ *param_list }})
+            @CACHE_{{ method_name }}[{{ param_list.splat }}] = _{{ method_name }}({{ param_list.splat }})
         end
     end
   end
@@ -102,18 +102,18 @@ module Memoize
     {% only_type_list = only_named_tuple.values %}
     {% only_def_param_list = only_named_tuple.map { |param, type| "#{param} : #{type}" }.join(", ").id %}
 
-    @CACHE_{{ method_name }} = {} of {{ *only_type_list }} => {{ return_type }}
+    @CACHE_{{ method_name }} = {} of {{ only_type_list.splat }} => {{ return_type }}
 
     def _{{ method_name }}({{ rest_def_param_list }}, {{ only_def_param_list }}) : {{ return_type }}
         {{ yield }}
     end
 
     def {{ method_name }}({{ rest_def_param_list }}, {{ only_def_param_list }}) : {{ return_type }}
-        if @CACHE_{{ method_name }}.has_key?({{ *only_param_list }})
-            @CACHE_{{ method_name }}[{{ *only_param_list }}]
+        if @CACHE_{{ method_name }}.has_key?({{ only_param_list.splat }})
+            @CACHE_{{ method_name }}[{{ only_param_list.splat }}]
         else
-            @CACHE_{{ method_name }}[{{ *only_param_list }}] = _{{ method_name }}(
-              {{ *rest_param_list }}, {{ *only_param_list }})
+            @CACHE_{{ method_name }}[{{ only_param_list.splat }}] = _{{ method_name }}(
+              {{ rest_param_list.splat }}, {{ only_param_list.splat }})
         end
     end
   end
@@ -131,18 +131,18 @@ module Memoize
     {% only_type_list = only_named_tuple.values %}
     {% only_def_param_list = only_named_tuple.map { |param, type| "#{param} : #{type}" }.join(", ").id %}
 
-    CACHE_{{ method_name }} = {} of {{ *only_type_list }} => {{ return_type }}
+    CACHE_{{ method_name }} = {} of {{ only_type_list.splat }} => {{ return_type }}
 
     def _{{ method_name }}({{ rest_def_param_list }}, {{ only_def_param_list }}) : {{ return_type }}
         {{ yield }}
     end
 
     def {{ method_name }}({{ rest_def_param_list }}, {{ only_def_param_list }}) : {{ return_type }}
-        if CACHE_{{ method_name }}.has_key?({{ *only_param_list }})
-            CACHE_{{ method_name }}[{{ *only_param_list }}]
+        if CACHE_{{ method_name }}.has_key?({{ only_param_list.splat }})
+            CACHE_{{ method_name }}[{{ only_param_list.splat }}]
         else
-            CACHE_{{ method_name }}[{{ *only_param_list }}] = _{{ method_name }}(
-              {{ *rest_param_list }}, {{ *only_param_list }})
+            CACHE_{{ method_name }}[{{ only_param_list.splat }}] = _{{ method_name }}(
+              {{ rest_param_list.splat }}, {{ only_param_list.splat }})
         end
     end
   end
