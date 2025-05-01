@@ -28,7 +28,7 @@
 # end
 # ```
 module Memoize
-  VERSION = "1.2.0"
+  VERSION = "1.2.1"
 
   # Macro which creates a memoized function without any space bounds (infinitely large cache).
   #
